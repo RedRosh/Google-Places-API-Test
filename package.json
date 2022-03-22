@@ -1,0 +1,24 @@
+{
+  "name": "google-places-api-test",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "node script",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/RedRosh/Google-Places-API-Test.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/RedRosh/Google-Places-API-Test/issues"
+  },
+  "homepage": "https://github.com/RedRosh/Google-Places-API-Test#readme",
+  "dependencies": {
+    "@googlemaps/google-maps-services-js": "^3.3.11"
+  }
+}
