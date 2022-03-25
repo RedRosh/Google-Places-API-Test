@@ -19,6 +19,9 @@
   },
   "homepage": "https://github.com/RedRosh/Google-Places-API-Test#readme",
   "dependencies": {
-    "@googlemaps/google-maps-services-js": "^3.3.11"
+    "@googlemaps/google-maps-services-js": "^3.3.11",
+    "buffer-image": "^1.0.0",
+    "dotenv": "^16.0.0",
+    "json-2-csv": "^3.17.0"
   }
 }
