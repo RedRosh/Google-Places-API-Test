@@ -32,16 +32,16 @@ textSearchTest = async (client, pageToken) => {
 };
 
 //* Predict the place based on a Text
-placeAutoCompleteTest = async (client) => {
+placeAutoCompleteTest = async (client, place) => {
   try {
     let placeAutoCompleteTest = await client.placeQueryAutocomplete({
       params: {
-        input: "Larach",
+        input: place,
         key: process.env.GOOGLE_MAPS_API_KEY,
       },
       timeout: 2000, // milliseconds
     });
-    console.log(placeAutoCompleteTest.data.predictions);
+    return placeAutoCompleteTest.data.predictions;
   } catch (e) {
     console.log(e.response);
   }
@@ -120,32 +120,12 @@ let main = async () => {
   let data = [];
   let PageToken = "";
   let numberOfPages = 1;
-  do {
-    let movieTheaters = await textSearchTest(client, PageToken);
-    PageToken = movieTheaters.nextPageToken;
-    console.log(movieTheaters);
-    console.log("Page : %d", numberOfPages++);
-    await sleep(30000);
-  } while (PageToken !== "");
-  // for (let movieTheater of movieTheaters) {
-  //   let moreDetailsAboutMovieTheater = await placeDetailsTest(
-  //     client,
-  //     movieTheater.place_id
-  //   );
-  //   data.push({
-  //     business_status: movieTheater.business_status,
-  //     formatted_address: movieTheater.formatted_address,
-  //     name: movieTheater.name,
-  //     place_id: movieTheater.place_id,
-  //     types: movieTheater.types,
-  //     url: moreDetailsAboutMovieTheater.url,
-  //     geometry: moreDetailsAboutMovieTheater.geometry.location,
-  //   });
-  //   await sleep(1000);
-  // }
-  // console.log(data);
-  // let csv = await converter.json2csvAsync(data);
-  // fs.writeFileSync(`dataTemp${Date.now()}.csv`, csv);
+  let place = "Billings United States NORTH AMERICA";
+  const pred = await placeAutoCompleteTest(client, place);
+  if (pred.length !== 0) {
+    const details = await placeDetailsTest(client, pred[0].place_id);
+    console.log(details);
+  }
 };
 
 main();
